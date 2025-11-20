@@ -4,6 +4,7 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour {
     public static SaveManager Instance;
     public string Name;
+    public string CurrentName;
     public int HighScore;
 
     private void Awake() {

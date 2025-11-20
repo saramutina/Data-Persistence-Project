@@ -1,15 +1,20 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class MenuUIHandler : MonoBehaviour {
     public TextMeshProUGUI bestScoreText;
-   
+    public TMP_InputField nameInputField;
+
     private void Start() {
         if (SaveManager.Instance != null) {
+
             SaveManager.Instance.LoadHighScore();
+            nameInputField.text = SaveManager.Instance.CurrentName;
+
             if (SaveManager.Instance.HighScore > 0) {
-                bestScoreText.text = "Best Score: " + SaveManager.Instance.Name + " : " + SaveManager.Instance.HighScore;
+                bestScoreText.text = "Best Score: \n" + SaveManager.Instance.Name + " : " + SaveManager.Instance.HighScore;
             }
             else {
                 bestScoreText.text = "Best Score: N/A";
@@ -18,8 +23,8 @@ public class MenuUIHandler : MonoBehaviour {
 
     }
 
-    public void SetPlayerName(string name) {
-        SaveManager.Instance.Name = name;
+    public void SetPlayerName() {
+        SaveManager.Instance.CurrentName = nameInputField.text;
     }
 
     public void StartNew() {
